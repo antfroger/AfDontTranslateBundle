@@ -1,0 +1,25 @@
+{
+    "name": "af/dont-translate-bundle",
+    "description": "A bundle to translate or don't translate a Symfony2 application",
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/antfroger/AfDontTranslateBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Antoine Froger",
+            "email": "antfroger@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.3"
+    },
+    "autoload": {
+        "psr-0": { "Af\\Bundle\\DontTranslateBundle": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
