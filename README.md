@@ -6,7 +6,7 @@ A bundle for Symfony2 that allows you to switch between translated and untransla
 [![Latest Stable Version](https://poser.pugx.org/af/dont-translate-bundle/v/stable.png)](https://packagist.org/packages/af/dont-translate-bundle "Latest Stable Version")
 [![Latest Unstable Version](https://poser.pugx.org/af/dont-translate-bundle/v/unstable.png)](https://packagist.org/packages/af/dont-translate-bundle "Latest Unstable Version")
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/c9aacbe9-4d32-42e3-83c7-fc4f6ee77d1e/mini.png)](https://insight.sensiolabs.com/projects/c9aacbe9-4d32-42e3-83c7-fc4f6ee77d1e "SensioLabsInsight")
-# @todo add travis ci
+[![Build Status](https://travis-ci.org/antfroger/AfDontTranslateBundle.png?branch=master)](https://travis-ci.org/antfroger/AfDontTranslateBundle "Build status")
 
 Installation
 ------------
