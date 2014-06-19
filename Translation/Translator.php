@@ -36,6 +36,18 @@ class Translator extends BaseTranslator
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function transChoice($id, $number, array $parameters = array(), $domain = null, $locale = null)
+    {
+        if ($this->debugMode) {
+            return $id;
+        }
+
+        return parent::transChoice($id, $number, $parameters, $domain, $locale);
+    }
+
+    /**
      * @param  boolean $debugMode
      *
      * @return $this
