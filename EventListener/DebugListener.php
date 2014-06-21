@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code
  */
+
 namespace Af\Bundle\DontTranslateBundle\EventListener;
 
 use Af\Bundle\DontTranslateBundle\Translation\Translator;

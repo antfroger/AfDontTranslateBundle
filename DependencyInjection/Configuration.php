@@ -31,9 +31,9 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('get_param_name')
-                    ->info('The GET parameter\'s name to enable the don\'t translate mode')
-                    ->example('translate')
-                    ->defaultValue('trans')
+                    ->info('The GET parameter name activating the don\'t translate mode')
+                    ->example('untranslate')
+                    ->defaultValue('untranslate')
                 ->end()
             ->end()
         ;

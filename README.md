@@ -11,33 +11,26 @@ A bundle for Symfony2 that allows you to switch between translated and untransla
 Installation
 ------------
 
-Add the required package using composer.
+**1. Add the required package using composer.**
 
 ```sh
-    composer require af/dont-translate-bundle:dev-master
+composer require af/dont-translate-bundle:dev-master
 ```
 
-Add the bundle to your AppKernel.
+**2.Add the bundle to your AppKernel.**
 
 ```php
-    <?php
-    // in %kernel.root_dir%/AppKernel.php
-    $bundles[] = new Af\Bundle\DontTranslateBundle\AfDontTranslateBundle();
+<?php
+// in %kernel.root_dir%/AppKernel.php
+$bundles[] = new Af\Bundle\DontTranslateBundle\AfDontTranslateBundle();
 ```
 
-To set the GET parameter (only in the `dev` environment, you may simply configure the AfDontTranslateBundle as follows):
+**3. Optionally, define the GET parameter name used to not translate the application**
 
 ```yaml
-    # app/config/config.yml
-        af_dont_translate:
-            get_param_name: untrans
-```
-
-You must override a parameter
-
-```yaml
-    # app/config/parameters.yml
-        translator.class: Af\Bundle\DontTranslateBundle\Translation\Translator
+# app/config/config.yml
+af_dont_translate:
+    get_param_name: untrans
 ```
 
 Usage
@@ -46,7 +39,7 @@ Usage
 To display your application without translation, add the GET parameter `get_param_name` to the URL
 
 ```html
-    http://my-application.io/?untrans
+http://my-application.io/?untrans
 ```
 
 License
@@ -54,3 +47,9 @@ License
 
 This library is under the MIT license.
 For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
+
+Future features
+---------------
+
+* Add the ability to authorize the activation of the don't translate mode only for defined roles
+* The don't translate mode can be activated by GET parameters or cookies

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of Travel With Me
  *
@@ -11,8 +12,6 @@
 namespace Af\Bundle\DontTranslateBundle\Tests\Translation;
 
 use Af\Bundle\DontTranslateBundle\Translation\Translator;
-use Symfony\Component\Translation\MessageCatalogue;
-use Symfony\Component\Translation\MessageSelector;
 
 /**
  * Class TranslatorTest
@@ -23,85 +22,72 @@ use Symfony\Component\Translation\MessageSelector;
  */
 class TranslatorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testTrans()
+    public function testTranslate()
     {
-        // debug = true, messages are translated
-        $translator = $this->getTranslator($this->getLoader());
-        $translator->setLocale('fr');
-        $translator->setFallbackLocales(array('en'));
+        // debug = false, messages are translated
+        $translator = $this->getTranslator(false);
 
-        $this->assertEquals('foo (FR)', $translator->trans('foo'));
-        $this->assertEquals('bar (EN)', $translator->trans('bar'));
-        $this->assertEquals('choice 0 (EN)', $translator->transChoice('choice', 0));
-        $this->assertEquals('no translation', $translator->trans('no translation'));
+        $this->assertEquals('foo translation', $translator->trans('foo'));
+        $this->assertEquals('bar translation', $translator->trans('bar'));
+        $this->assertEquals('baz translation', $translator->trans('baz'));
+        $this->assertEquals('foo 2', $translator->transChoice('foo', 2));
+        $this->assertEquals('bar single', $translator->transChoice('bar', 0));
+        $this->assertEquals('bar plural', $translator->transChoice('bar', 1));
+    }
 
-        // debug = true, no translation
-        $translator->setDebug(true);
+    public function testDontTranslate()
+    {
+        // debug = true, messages aren't translated
+        $translator = $this->getTranslator(true);
 
         $this->assertEquals('foo', $translator->trans('foo'));
         $this->assertEquals('bar', $translator->trans('bar'));
-        $this->assertEquals('choice', $translator->transChoice('choice', 0));
-        $this->assertEquals('no translation', $translator->trans('no translation'));
+        $this->assertEquals('baz', $translator->trans('baz'));
+        $this->assertEquals('foo', $translator->transChoice('foo', 2));
+        $this->assertEquals('bar', $translator->transChoice('bar', 0));
+        $this->assertEquals('bar', $translator->transChoice('bar', 1));
     }
 
-    protected function getCatalogue($locale, $messages)
+    private function getTranslator($debug)
     {
-        $catalogue = new MessageCatalogue($locale);
-        foreach ($messages as $key => $translation) {
-            $catalogue->set($key, $translation);
-        }
+        $debug = (bool)$debug;
 
-        return $catalogue;
-    }
+        $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
+        $translator
+            ->expects($debug ? $this->never() : $this->exactly(3))
+            ->method('trans')
+            ->will($this->returnCallback(function ($key) {
+                $values = array(
+                    'foo' => 'foo translation',
+                    'bar' => 'bar translation',
+                    'baz' => 'baz translation',
+                );
 
-    protected function getLoader()
-    {
-        $loader = $this->getMock('Symfony\Component\Translation\Loader\LoaderInterface');
-        $loader
-            ->expects($this->at(0))
-            ->method('load')
-            ->will($this->returnValue($this->getCatalogue('fr', array(
-                'foo' => 'foo (FR)',
-            ))))
+                return isset($values[$key]) ? $values[$key] : null;
+            }))
         ;
-        $loader
-            ->expects($this->at(1))
-            ->method('load')
-            ->will($this->returnValue($this->getCatalogue('en', array(
-                'foo'    => 'foo (EN)',
-                'bar'    => 'bar (EN)',
-                'choice' => '{0} choice 0 (EN)|{1} choice 1 (EN)|]1,Inf] choice inf (EN)',
-            ))))
-        ;
+        $translator
+            ->expects($debug ? $this->never() : $this->exactly(3))
+            ->method('transChoice')
+            ->will($this->returnCallback(function ($key, $count) {
+                $values = array(
+                    'foo' => 'foo 0|foo 1|foo 2',
+                    'bar' => 'bar single|bar plural',
+                );
 
-        return $loader;
-    }
+                if (!isset($values[$key])) {
+                    return null;
+                }
 
-    protected function getContainer($loader)
-    {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container
-            ->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue($loader))
+                $results = explode('|', $values[$key]);
+
+                return isset($results[$count]) ? $results[$count] : null;
+            }))
         ;
 
-        return $container;
-    }
-
-    protected function getTranslator($loader, $options = array())
-    {
-        $translator = new Translator(
-            $this->getContainer($loader),
-            new MessageSelector(),
-            array('loader' => array('loader')),
-            $options
-        );
-
-        $translator->addResource('loader', 'foo', 'fr');
-        $translator->addResource('loader', 'foo', 'en');
+        $translator = new Translator($translator);
+        $translator->setDebug($debug);
 
         return $translator;
     }
 }
- 
