@@ -23,6 +23,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 class Translator implements TranslatorInterface
 {
     protected $translator;
+
     /** @var bool */
     protected $debug = false;
 

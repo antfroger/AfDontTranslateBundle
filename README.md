@@ -25,12 +25,17 @@ composer require af/dont-translate-bundle:dev-master
 $bundles[] = new Af\Bundle\DontTranslateBundle\AfDontTranslateBundle();
 ```
 
-**3. Optionally, define the GET parameter name used to not translate the application**
+**3. Optionally, define the configuration**
+
+* **get_param_name**: the name of the GET parameter that you use to enable the feature
+* **roles**: the user should at least have one of these roles to be able to enable the feature  
+  if no role is defined the user doesn't need to be logged in to be able to enable the feature
 
 ```yaml
-# app/config/config.yml
+# app/config/config.ym
 af_dont_translate:
-    get_param_name: untrans
+    get_param_name: "untrans"
+    roles: ["ROLE_ADMIN", "ROLE_TRANSLATOR"]
 ```
 
 Usage

@@ -35,6 +35,12 @@ class Configuration implements ConfigurationInterface
                     ->example('untranslate')
                     ->defaultValue('untranslate')
                 ->end()
+                ->arrayNode('roles')
+                    ->info('Authorized roles list')
+                    ->example('ROLE_TRANSLATOR')
+                    ->prototype('scalar')
+                    ->end()
+                ->end()
             ->end()
         ;
 
