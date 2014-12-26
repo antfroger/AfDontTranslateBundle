@@ -1,6 +1,6 @@
 {
-    "name": "af/dont-translate-bundle",
-    "description": "A bundle to translate or don't translate a Symfony2 application",
+    "name": "antfroger/dont-translate-bundle",
+    "description": "A bundle to disable the translation of your Symfony2 applications and only display the translation keys",
     "type": "symfony-bundle",
     "homepage": "https://github.com/antfroger/AfDontTranslateBundle",
     "license": "MIT",
@@ -12,7 +12,10 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "symfony/translation": ">=2.3"
+        "symfony/translation": "~2.3"
+    },
+    "replace": {
+        "af/dont-translate-bundle": "1.2.*"
     },
     "autoload": {
         "psr-4": { "Af\\Bundle\\DontTranslateBundle\\": "" }
