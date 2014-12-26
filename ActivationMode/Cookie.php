@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author  Antoine Froger <antfroger@gmail.com>
  */
-class Cookie implements ActivationMode
+class Cookie implements ActivationModeInterface
 {
     /**
      * {@inheritdoc}

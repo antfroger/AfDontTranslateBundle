@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author  Antoine Froger <antfroger@gmail.com>
  */
-class Get implements ActivationMode
+class Get implements ActivationModeInterface
 {
     /**
      * {@inheritdoc}

@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author  Antoine Froger <antfroger@gmail.com>
  */
-interface ActivationMode
+interface ActivationModeInterface
 {
     /**
      * @param  string  $paramName   Name of the parameter that enables the mode
