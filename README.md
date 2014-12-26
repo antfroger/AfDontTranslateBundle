@@ -27,21 +27,23 @@ $bundles[] = new Af\Bundle\DontTranslateBundle\AfDontTranslateBundle();
 
 **3. Optionally, define the configuration**
 
-* **get_param_name**: the name of the GET parameter that you use to enable the feature
-* **roles**: the user should at least have one of these roles to be able to enable the feature  
+* **mode**: the mode you want to use to enable the feature (get, cookie)
+* **param_name**: the name of the parameter that you use to enable the feature
+* **roles**: the user should at least have one of these roles to be able to enable the feature
   if no role is defined the user doesn't need to be logged in to be able to enable the feature
 
 ```yaml
 # app/config/config.ym
 af_dont_translate:
-    get_param_name: "untrans"
+    mode: "get"
+    param_name: "untrans"
     roles: ["ROLE_ADMIN", "ROLE_TRANSLATOR"]
 ```
 
 Usage
 -----
 
-To display your application without translation, add the GET parameter `get_param_name` to the URL
+To display your application without translation, add the GET parameter `param_name` to the URL
 
 ```html
 http://my-application.io/?untrans

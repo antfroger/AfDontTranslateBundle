@@ -5,13 +5,18 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="af_dont_translate.activation_mode.factory.class">Af\Bundle\DontTranslateBundle\ActivationMode\ActivationModeFactory</parameter>
         <parameter key="af_dont_translate.debug.request_listener.class">Af\Bundle\DontTranslateBundle\EventListener\DebugListener</parameter>
     </parameters>
 
     <services>
+        <service id="af_dont_translate.activation_mode.factory" class="%af_dont_translate.activation_mode.factory.class%" />
+
         <service id="af_dont_translate.debug.request_listener" class="%af_dont_translate.debug.request_listener.class%">
             <argument type="service" id="security.context" />
             <argument type="service" id="translator" />
+            <argument type="service" id="af_dont_translate.activation_mode.factory" />
+            <argument />
             <argument />
             <argument />
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
