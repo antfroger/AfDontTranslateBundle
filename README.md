@@ -52,9 +52,3 @@ License
 
 This library is under the MIT license.
 For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
-
-Future features
----------------
-
-* Add the ability to authorize the activation of the don't translate mode only for defined roles
-* The don't translate mode can be activated by GET parameters or cookies
