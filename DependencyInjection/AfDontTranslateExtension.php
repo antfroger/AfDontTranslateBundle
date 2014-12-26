@@ -34,7 +34,8 @@ class AfDontTranslateExtension extends Extension
         $loader->load('services.xml');
 
         $definition = $container->getDefinition('af_dont_translate.debug.request_listener');
-        $definition->replaceArgument(2, $config['get_param_name']);
-        $definition->replaceArgument(3, isset($config['roles']) ? $config['roles'] : array());
+        $definition->replaceArgument(3, $config['mode']);
+        $definition->replaceArgument(4, $config['param_name']);
+        $definition->replaceArgument(5, isset($config['roles']) ? $config['roles'] : array());
     }
 }

@@ -11,6 +11,7 @@
 
 namespace Af\Bundle\DontTranslateBundle\EventListener;
 
+use Af\Bundle\DontTranslateBundle\ActivationMode\ActivationModeFactory;
 use Af\Bundle\DontTranslateBundle\Translation\Translator;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -30,6 +31,12 @@ class DebugListener
     /** @var Translator */
     private $translator;
 
+    /** @var ActivationModeFactory */
+    private $activationModeFactory;
+
+    /** @var string */
+    private $activationMode;
+
     /** @var string */
     private $requestParam;
 
@@ -41,15 +48,25 @@ class DebugListener
      *
      * @param SecurityContextInterface $securityContext
      * @param Translator               $translator
+     * @param ActivationModeFactory    $activationModeFactory
      * @param string                   $requestParam
+     * @param string                   $activationMode
      * @param array                    $authorizedRoles
      */
-    public function __construct(SecurityContextInterface $securityContext, Translator $translator, $requestParam, array $authorizedRoles = array())
-    {
-        $this->securityContext = $securityContext;
-        $this->translator      = $translator;
-        $this->requestParam    = $requestParam;
-        $this->authorizedRoles = $authorizedRoles;
+    public function __construct(
+        SecurityContextInterface $securityContext,
+        Translator $translator,
+        ActivationModeFactory $activationModeFactory,
+        $activationMode,
+        $requestParam,
+        array $authorizedRoles = array()
+    ) {
+        $this->securityContext       = $securityContext;
+        $this->translator            = $translator;
+        $this->activationModeFactory = $activationModeFactory;
+        $this->activationMode        = $activationMode;
+        $this->requestParam          = $requestParam;
+        $this->authorizedRoles       = $authorizedRoles;
     }
 
     /**
@@ -63,8 +80,9 @@ class DebugListener
 
         $request = $event->getRequest();
 
-        // Checks if the feature is enabled and the user has the right access
-        if (!is_null($request->query->get($this->requestParam)) && $this->isGranted()) {
+        $activationMode = $this->activationModeFactory->build($this->activationMode);
+
+        if ($activationMode->isEnabled($this->requestParam, $request) && $this->isGranted()) {
             $this->translator->setDebug(true);
         }
     }
