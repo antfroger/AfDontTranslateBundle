@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "718bcbf76bd1865c5f23654d575ae69f",
+    "hash": "5e41476511d206d8bb861e7f2541c309",
     "packages": [
         {
             "name": "symfony/translation",
@@ -70,6 +70,7 @@
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.3"
     },
