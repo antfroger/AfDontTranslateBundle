@@ -1,4 +1,35 @@
 checks:
     php:
-        code_rating: true
-        duplication: true
+        use_self_instead_of_fqcn: true
+        uppercase_constants: true
+        simplify_boolean_return: true
+        return_doc_comments: true
+        return_doc_comment_if_not_inferrable: true
+        remove_extra_empty_lines: true
+        properties_in_camelcaps: true
+        prefer_while_loop_over_for_loop: true
+        phpunit_assertions: true
+        parameters_in_camelcaps: true
+        parameter_doc_comments: true
+        param_doc_comment_if_not_inferrable: true
+        overriding_parameter: true
+        optional_parameters_at_the_end: true
+        no_short_variable_names:
+            minimum: '3'
+        no_short_method_names:
+            minimum: '3'
+        newline_at_end_of_file: true
+        more_specific_types_in_doc_comments: true
+        function_in_camel_caps: true
+        classes_in_camel_caps: true
+        check_method_contracts:
+            verify_interface_like_constraints: true
+            verify_documented_constraints: true
+            verify_parent_constraints: true
+        avoid_perl_style_comments: true
+        avoid_multiple_statements_on_same_line: true
+        align_assignments: true
+
+filter:
+    excluded_paths:
+        - Tests/*
