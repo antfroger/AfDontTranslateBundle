@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class DebugListener
 {
-    /** @var SecurityContext */
+    /** @var SecurityContextInterface */
     private $securityContext;
 
     /** @var Translator */

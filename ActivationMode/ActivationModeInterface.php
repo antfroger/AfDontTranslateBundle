@@ -14,7 +14,7 @@ namespace Af\Bundle\DontTranslateBundle\ActivationMode;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ActivationMode
+ * Interface ActivationModeInterface
  *
  * @package Af\Bundle\DontTranslateBundle\ActivationMode
  *

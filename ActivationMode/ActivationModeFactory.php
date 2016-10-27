@@ -23,7 +23,7 @@ class ActivationModeFactory
     /**
      * @param  string $modeName
      *
-     * @return ActivationMode
+     * @return ActivationModeInterface
      * @throws \InvalidArgumentException
      */
     public function build($modeName)
@@ -31,10 +31,8 @@ class ActivationModeFactory
         switch (strtolower($modeName)) {
             case 'get':
                 return new Get();
-                break;
             case 'cookie':
                 return new Cookie();
-                break;
         }
 
         throw new \InvalidArgumentException(sprintf('%s is not a valid mode', $modeName));
